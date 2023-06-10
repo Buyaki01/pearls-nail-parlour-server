@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 // @route GET /users
 // @access Private
 const getAllUsers = asyncHandler(async (req,res) => {
-  const users = await User.find().select('-password').lean() //we don't need moongose methods to be returned with it
+  const users = await User.find().select('-password').lean() //we won't be using any moongose methods like save inside this method
   if (!users) {
     return res.status(400).json({ message: 'No users found' })
   }
@@ -88,7 +88,24 @@ const updateUser = asyncHandler(async (req,res) => {
 // @route DELETE /users
 // @access Private
 const deleteUser = asyncHandler(async (req,res) => {
-  
+  const { id } = req.body
+  if (!id) {
+    return res.status(400).json({ message: 'User ID required' })
+  }
+  const notes = await Note.findOne({ user: id }).lean().exec()
+  if (notes?.length) {
+    return res.status(400).json({ message: 'user has assigned notes' })
+  }
+
+  const user = await User.findById(id).exec()
+  if (!user) {
+    return res.status(400).json({ message: 'User not found'})
+  }
+
+  const result = await user.deleteOne()
+
+  const reply = `Username ${result.username} with ID ${result._id} deleted`
+  res.json(reply)
 })
 
 module.exports = { getAllUsers, createNewUser, updateUser, deleteUser }
