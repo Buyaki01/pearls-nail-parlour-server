@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 // @access Private
 const getAllUsers = asyncHandler(async (req,res) => {
   const users = await User.find().select('-password').lean() //we won't be using any moongose methods like save inside this method
-  if (!users) {
+  if (!users?.length) {
     return res.status(400).json({ message: 'No users found' })
   }
   res.json(users)
@@ -48,7 +48,7 @@ const createNewUser = asyncHandler(async (req,res) => {
 })
 
 // @describe Update user
-// @route PUT /users
+// @route PATCH /users
 // @access Private
 const updateUser = asyncHandler(async (req,res) => {
   const { id, username, roles, active, password } = req.body
@@ -92,8 +92,8 @@ const deleteUser = asyncHandler(async (req,res) => {
   if (!id) {
     return res.status(400).json({ message: 'User ID required' })
   }
-  const notes = await Note.findOne({ user: id }).lean().exec()
-  if (notes?.length) {
+  const note = await Note.findOne({ user: id }).lean().exec()
+  if (note) {
     return res.status(400).json({ message: 'user has assigned notes' })
   }
 
