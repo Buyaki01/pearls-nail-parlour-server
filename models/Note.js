@@ -18,7 +18,7 @@ const noteSchema = new Schema({
   },
   completed: {
     type: Boolean,
-    required: true
+    default: false 
   }
 },
 {
