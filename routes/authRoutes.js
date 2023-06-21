@@ -4,12 +4,12 @@ const authController = require('../controllers/authController')
 const loginLimiter = require('../middleware/loginLimiter')
 
 router.route('/')
-  .post(loginLimiter,)
+  .post(loginLimiter, authController.login)
 
-router.route('/refresh')
+router.route('/refresh', authController.refresh)
   .get()
 
-router.route('/logout')
+router.route('/logout', authController.logout)
   .post()
 
-modulule.exports = router
+module.exports = router
