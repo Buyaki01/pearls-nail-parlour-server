@@ -43,7 +43,6 @@ const createNewUser = asyncHandler(async (req, res) => {
 
     // Create and store new user 
     const user = await User.create(userObject)
-    console.log(user)
 
     if (user) { //created 
         res.status(201).json({ message: `New user ${username} created` })
