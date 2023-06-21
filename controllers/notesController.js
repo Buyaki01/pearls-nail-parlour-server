@@ -43,15 +43,24 @@ const createNewNote = asyncHandler(async (req, res) => {
         return res.status(409).json({ message: 'Duplicate note title' })
     }
 
-    // Create and store the new user 
-    const note = await Note.create({ user, title, text })
+    try {
+        // Create and store the new note 
+        const note = await Note.create({ user, title, text })
 
-    if (note) { // Created 
-        return res.status(201).json({ message: 'New note created' })
-    } else {
-        return res.status(400).json({ message: 'Invalid note data received' })
-    }
-
+        if (note) { // Created 
+            return res.status(201).json({ message: 'New note created' })
+        } else {
+            return res.status(400).json({ message: 'Invalid note data received' })
+        }
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+          console.error('Validation error:', error.errors);
+        } else {
+          console.error('Error:', error);
+        }
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      
 })
 
 // @desc Update a note
