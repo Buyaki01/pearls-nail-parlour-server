@@ -6,10 +6,10 @@ const loginLimiter = require('../middleware/loginLimiter')
 router.route('/')
   .post(loginLimiter, authController.login)
 
-router.route('/refresh', authController.refresh)
-  .get()
+router.route('/refresh')
+  .get(authController.refresh)
 
-router.route('/logout', authController.logout)
-  .post()
+router.route('/logout')
+  .post(authController.logout)
 
 module.exports = router

@@ -28,7 +28,7 @@ const login = asyncHandler(async (req, res) => {
       }
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: '10s' }
+    { expiresIn: '15m' }
   )
 
   const refreshToken = jwt.sign(
@@ -40,7 +40,7 @@ const login = asyncHandler(async (req, res) => {
   //Create secure cookie with refresh token
   res.cookie('jwt', refreshToken, {
     httpOnly: true,
-    secure: true,
+    // secure: true,
     sameSite: 'None', //cross-site cookie
     maxAge: 7 * 24 * 60 * 60 * 1000 
   })
@@ -73,7 +73,7 @@ const refresh = (req, res) => {
           }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '10s' }
+        { expiresIn: '15m' }
       )
 
       res.json({ accessToken })
@@ -84,7 +84,11 @@ const refresh = (req, res) => {
 const logout = (req,res) => {
   const cookies = req.cookies
   if (!cookies?.jwt) return res.sendStatus(204) //No content
-  res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true })
+  res.clearCookie('jwt', { 
+    httpOnly: true, 
+    sameSite: 'None', 
+    // secure: true 
+  })
   res.json({ message: 'Cookie cleared' })
 }
 
