@@ -40,7 +40,7 @@ const login = asyncHandler(async (req, res) => {
   //Create secure cookie with refresh token
   res.cookie('jwt', refreshToken, {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     sameSite: 'None', //cross-site cookie
     maxAge: 7 * 24 * 60 * 60 * 1000 
   })
@@ -87,7 +87,7 @@ const logout = (req,res) => {
   res.clearCookie('jwt', { 
     httpOnly: true, 
     sameSite: 'None', 
-    // secure: true 
+    secure: true 
   })
   res.json({ message: 'Cookie cleared' })
 }
