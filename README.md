@@ -1,7 +1,7 @@
-# pearls-nail-parlor-server
+# Pearls Nail Parlor Server
 
 ## Overview
-This is the backend of a MERN application that is designed to streamline the workflow of nail artists and to reduce manual scheduling. 
+This is the backend of a MERN application that is designed to streamline the workflow of nail artists and to reduce manual scheduling within a company. Offers role based access control to nail artists, admins and managers for task and note management.
 
 ## Functionality
 The application currently has three employee statuses and one cannot access the app if they are not added by either the admin or the manager of the company.
