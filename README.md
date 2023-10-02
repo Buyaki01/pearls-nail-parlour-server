@@ -1,7 +1,29 @@
-# tech-notes-server
+# pearls-nail-parlor-server
 
 ## Overview
-This is the backend of a MERN application that provides a streamlined process for technicians to manage computer repair tickets requested by customers. Instead of relying on sticky notes, technicians can create, view, edit, and delete tickets through the application. The backend utilizes JWT tokens for authentication and authorization, allowing users to perform CRUD operations based on their roles within the company.
+This is the backend of a MERN application that is designed to streamline the workflow of nail artists and to reduce manual scheduling. 
+
+## Functionality
+The application currently has three employee statuses and one cannot access the app if they are not added by either the admin or the manager of the company.
+
+### Admin:
+- Can view, edit, delete any of the nail artist's notes
+- Can add new notes and assign tasks to any nail artist
+- Can view, edit, delete employee user settings
+- Can add employees to the application
+- Employees not added by the Admin cannot access the app
+
+### Manager:
+- Similar privileges to the Admin.
+- Can view, edit, delete any of the nail artist's notes
+- Can add new notes and assign tasks to any nail artist
+- Can view, edit, delete employee user settings
+- Can add employees to the application
+- Employees not added by the Manager cannot access the app
+
+### Employee:
+- Can only view, create, and edit their own notes
+- Cannot delete their own notes
 
 ## Technologies Used
 The backend of the app was built using the following technologies:
@@ -9,18 +31,19 @@ The backend of the app was built using the following technologies:
 - **MongoDB**: A document-oriented database used for storing data in the application
 - **Express**: A web application framework used for building the app's backend
 - **Node.js**: A JavaScript runtime environment used for running the app's backend
+- **JWT(Json Web Tokens)**
 
 ### Getting Started
 To get started with this app, follow these steps:
 
 1. Clone this repository: 
     ```bash 
-    git clone git@github.com:Buyaki01/tech-notes-server.git
+    git clone git@github.com:Buyaki01/pearls-nail-parlour-server.git
     ```
 
 2. Open the repository: 
     ```bash 
-    cd tech-notes-server
+    cd pearls-nail-parlour-server
     ```
 
 3. Create a .env file: 
@@ -50,7 +73,7 @@ To get started with this app, follow these steps:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Buyaki01/tech-notes-server/issues).
+Feel free to check the [issues page](https://github.com/Buyaki01/pearls-nail-parlour-server/issues).
 
 ## Show your support
 
